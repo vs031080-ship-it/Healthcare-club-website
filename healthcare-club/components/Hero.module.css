@@ -218,7 +218,7 @@
     }
 }
 
-/* ─── Responsive ─── */
+/* ─── Responsive: tablet ─── */
 @media (max-width: 900px) {
     .hero {
         height: 160vh;
@@ -234,12 +234,85 @@
         font-size: clamp(48px, 14vw, 80px);
     }
 
+    .secondLine {
+        font-size: clamp(42px, 12.5vw, 70px);
+    }
+
     .chip {
         display: none;
+    }
+
+    .photoWrap {
+        bottom: -120px;
+        /* less extreme offset on tablet */
+        max-width: 700px;
     }
 
     .ctaBtn {
         padding: 14px 32px;
         font-size: 13px;
+    }
+}
+
+/* ─── Responsive: mobile phone ─── */
+@media (max-width: 480px) {
+    .hero {
+        height: 130vh;
+        /* less scroll zone on phone */
+    }
+
+    .sticky {
+        justify-content: flex-start;
+    }
+
+    .textBlock {
+        top: 56px;
+        /* mobile navbar is a bit shorter */
+        padding: 0 16px;
+    }
+
+    .headline {
+        font-size: clamp(36px, 11vw, 52px);
+        margin-top: 6px;
+        line-height: 1.08;
+    }
+
+    .secondLine {
+        font-size: clamp(32px, 9.5vw, 46px);
+        margin-top: 0.1em;
+    }
+
+    .bgCircle {
+        width: 260px;
+        height: 260px;
+        bottom: -60px;
+    }
+
+    /* Reset bottom offset on phone — image natural height at phone width
+       is short enough to sit comfortably below the text */
+    .photoWrap {
+        bottom: 0;
+        max-width: 100%;
+    }
+
+    .ctaRow {
+        bottom: 4vh;
+    }
+
+    .ctaBtn {
+        padding: 12px 22px;
+        font-size: 12px;
+        gap: 10px;
+    }
+
+    .ctaArrow {
+        width: 28px;
+        height: 28px;
+        font-size: 14px;
+    }
+
+    .scrollHint {
+        font-size: 8px;
+        bottom: 1vh;
     }
 }
