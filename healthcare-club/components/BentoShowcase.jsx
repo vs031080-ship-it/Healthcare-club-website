@@ -28,9 +28,9 @@ export default function BentoShowcase() {
                 <div data-reveal className={styles.header}>
                     <h2 className={styles.title}>
                         A centralized approach to personalized health,{' '}
-                        <img src="https://images.unsplash.com/photo-1512428559087-560fa5ceab42?w=160&q=80" className="inline-avatar" alt="App" loading="lazy" />{' '}
-                        putting your family's records secure under{' '}
-                        <img src="https://images.unsplash.com/photo-1614064641913-a530a504c5ed?w=160&q=80" className="inline-avatar" alt="Security" loading="lazy" />{' '}
+                        <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=160&q=80" className="inline-avatar" alt="App" loading="lazy" />{' '}
+                        putting your family&apos;s records secure under{' '}
+                        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=160&q=80" className="inline-avatar" alt="Security" loading="lazy" />{' '}
                         one roof.
                     </h2>
                 </div>
