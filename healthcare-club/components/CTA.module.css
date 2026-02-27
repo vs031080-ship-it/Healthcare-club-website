@@ -178,33 +178,24 @@
     background: #08d49e;
 }
 
-/* Apple App Store (coming soon) */
+/* Apple App Store */
 .appleBtn {
     display: inline-flex;
     align-items: center;
     gap: 14px;
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.1);
     color: white;
+    text-decoration: none;
     border-radius: 16px;
     padding: 14px 28px;
-    border: 1.5px solid rgba(255, 255, 255, 0.15);
-    opacity: 0.75;
-    cursor: default;
-    position: relative;
+    border: 1.5px solid rgba(255, 255, 255, 0.25);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
-.appleBtn::after {
-    content: 'Soon';
-    position: absolute;
-    top: -10px;
-    right: -8px;
-    background: rgba(255, 255, 255, 0.15);
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 10px;
-    font-weight: 700;
-    padding: 2px 8px;
-    border-radius: 20px;
-    letter-spacing: 0.5px;
+.appleBtn:hover {
+    transform: translateY(-3px) scale(1.02);
+    background: rgba(255, 255, 255, 0.18);
+    box-shadow: 0 14px 44px rgba(255, 255, 255, 0.1);
 }
 
 .playIcon {
