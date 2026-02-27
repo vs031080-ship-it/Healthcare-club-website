@@ -25,9 +25,9 @@ export default function Hero() {
             const maxScroll = heroHeight - vp;
             const progress = Math.max(0, Math.min(1, scrolled / maxScroll));
 
-            // On mobile: gentler movement (–80px vs –160px) so it feels right on small screens
-            const yMove = progress * (isMobile ? -80 : -160);
-            const scale = 1 + progress * (isMobile ? 0.03 : 0.06);
+            // On mobile: more travel to match the bigger 190%-wide image
+            const yMove = progress * (isMobile ? -120 : -160);
+            const scale = 1 + progress * (isMobile ? 0.04 : 0.06);
             // translateX(-50%) keeps it centred horizontally on all screen sizes
             photoRef.current.style.transform = `translateX(-50%) translateY(${yMove}px) scale(${scale})`;
             photoRef.current.style.opacity = String(1 - progress * 0.4);

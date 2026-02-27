@@ -257,25 +257,26 @@
 /* ─── Responsive: mobile phone ─── */
 @media (max-width: 480px) {
 
-    /* Keep a scroll zone so the parallax animation plays */
+    /* Same 200vh scroll zone as desktop — gives full parallax feel */
     .hero {
-        height: 180vh;
+        height: 200vh;
     }
 
-    /* sticky frame stays 100vh — this is what creates the parallax feel */
+    /* sticky frame stays 100vh — the heart of the parallax */
     .sticky {
         overflow: hidden;
     }
 
     .bgCircle {
-        width: 260px;
-        height: 260px;
-        bottom: -40px;
+        width: 320px;
+        height: 320px;
+        bottom: -60px;
     }
 
+    /* Navbar on mobile is ~62px tall — give 80px top so headline clears it */
     .textBlock {
-        top: 56px;
-        padding: 0 16px;
+        top: 80px;
+        padding: 0 20px;
     }
 
     .headline {
@@ -290,16 +291,15 @@
     }
 
     /*
-     * Anchor the photo via `top` so it sits just below the headline.
-     * Headline takes ~170px at mobile sizes (top:56px + ~114px text).
-     * We start the image at top:230px — snug below the text.
-     * The JS then moves it upward as the user scrolls (translateX(-50%) + translateY).
+     * width: 100% — no left/right clipping.
+     * top: 190px — image starts just below the headline (~80px nav + ~110px text).
+     * The JS translateY moves it UP by up to -120px as you scroll,
+     * giving a smooth rise animation without any cropping.
      */
     .photoWrap {
-        top: 220px;
+        top: 190px;
         bottom: auto;
         left: 50%;
-        transform: translateX(-50%);
         width: 100%;
         max-width: 100%;
     }

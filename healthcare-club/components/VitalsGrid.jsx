@@ -33,7 +33,7 @@ export default function VitalsGrid() {
             <div className={styles.container}>
                 <div data-reveal className={styles.header}>
                     <p className="section-label">( Vitals Tracking )</p>
-                    <h2 className={styles.title}>Backed by science, guided by experts</h2>
+                    <h2 className={styles.title}>Simple vitals tracking for the whole family</h2>
                 </div>
 
                 <div className={styles.grid}>
@@ -70,7 +70,6 @@ export default function VitalsGrid() {
                                     ))}
                                 </div>
                             </div>
-                            <div className={styles.badge}>Clinically Proven</div>
                         </div>
                     ))}
                 </div>

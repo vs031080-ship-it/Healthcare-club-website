@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useRef } from 'react';
+import Image from 'next/image';
 import styles from './Navbar.module.css';
 
 export default function Navbar() {
@@ -26,7 +27,7 @@ export default function Navbar() {
         <nav ref={navRef} className={styles.nav}>
             <div className={styles.inner}>
                 <a className={styles.logo} href="#">
-                    <span className={styles.logoIcon}>❤️</span>
+                    <Image src="/logo-icon.png" alt="Healthcare Club Icon" className={styles.logoIconImage} width={28} height={28} />
                     <span>Healthcare <strong>Club</strong></span>
                 </a>
 

@@ -5,6 +5,9 @@ export const metadata = {
   title: 'Healthcare Club - Your Personal Health & Wellness Hub',
   description: 'Manage medical records, track vitals, link family accounts, and access emergency health info — all in one secure app. Trusted by 10 lakh+ Indian families.',
   keywords: 'healthcare app, medical records, vitals tracking, family health, emergency access',
+  icons: {
+    icon: '/favicon.png',
+  },
 };
 
 export default function RootLayout({ children }) {
