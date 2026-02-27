@@ -256,19 +256,35 @@
 
 /* ─── Responsive: mobile phone ─── */
 @media (max-width: 480px) {
+
+    /* On mobile: no parallax scroll zone — just natural page height */
     .hero {
-        height: 130vh;
-        /* less scroll zone on phone */
+        height: auto;
     }
 
+    /* Switch sticky frame to normal flow so content stacks without gaps */
     .sticky {
-        justify-content: flex-start;
+        position: relative;
+        height: auto;
+        overflow: visible;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 56px;
+        padding-bottom: 32px;
     }
 
+    .bgCircle {
+        width: 260px;
+        height: 260px;
+        bottom: -40px;
+    }
+
+    /* Text block: static in flow, no absolute positioning */
     .textBlock {
-        top: 56px;
-        /* mobile navbar is a bit shorter */
+        position: static;
         padding: 0 16px;
+        width: 100%;
     }
 
     .headline {
@@ -282,21 +298,20 @@
         margin-top: 0.1em;
     }
 
-    .bgCircle {
-        width: 260px;
-        height: 260px;
-        bottom: -60px;
-    }
-
-    /* Reset bottom offset on phone — image natural height at phone width
-       is short enough to sit comfortably below the text */
+    /* Photo: static in flow, sits directly below text — NO absolute offset */
     .photoWrap {
-        bottom: 0;
+        position: static;
+        transform: none !important;
+        opacity: 1 !important;
+        width: 100%;
         max-width: 100%;
+        margin-top: 16px;
     }
 
+    /* CTA: static below photo */
     .ctaRow {
-        bottom: 4vh;
+        position: static;
+        margin-top: 20px;
     }
 
     .ctaBtn {
@@ -311,8 +326,8 @@
         font-size: 14px;
     }
 
+    /* Hide scroll hint on mobile — no parallax scroll zone */
     .scrollHint {
-        font-size: 8px;
-        bottom: 1vh;
+        display: none;
     }
 }

@@ -17,6 +17,8 @@ export default function Hero() {
     useEffect(() => {
         const onScroll = () => {
             if (!heroRef.current || !photoRef.current) return;
+            // On mobile the layout is static flow — skip JS parallax entirely
+            if (window.innerWidth <= 480) return;
             const heroTop = heroRef.current.offsetTop;
             const heroHeight = heroRef.current.offsetHeight;
             const vp = window.innerHeight;
