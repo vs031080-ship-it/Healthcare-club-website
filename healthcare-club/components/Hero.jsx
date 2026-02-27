@@ -17,8 +17,7 @@ export default function Hero() {
     useEffect(() => {
         const onScroll = () => {
             if (!heroRef.current || !photoRef.current) return;
-            // On mobile the layout is static flow — skip JS parallax entirely
-            if (window.innerWidth <= 480) return;
+            const isMobile = window.innerWidth <= 480;
             const heroTop = heroRef.current.offsetTop;
             const heroHeight = heroRef.current.offsetHeight;
             const vp = window.innerHeight;
@@ -26,10 +25,10 @@ export default function Hero() {
             const maxScroll = heroHeight - vp;
             const progress = Math.max(0, Math.min(1, scrolled / maxScroll));
 
-            // Include the horizontal centering AND the scroll animation together
-            const yMove = progress * -160;
-            const scale = 1 + progress * 0.06;
-            // We use translateX(-50%) to keep it centered + add the scroll Y
+            // On mobile: gentler movement (–80px vs –160px) so it feels right on small screens
+            const yMove = progress * (isMobile ? -80 : -160);
+            const scale = 1 + progress * (isMobile ? 0.03 : 0.06);
+            // translateX(-50%) keeps it centred horizontally on all screen sizes
             photoRef.current.style.transform = `translateX(-50%) translateY(${yMove}px) scale(${scale})`;
             photoRef.current.style.opacity = String(1 - progress * 0.4);
         };
