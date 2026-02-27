@@ -76,7 +76,7 @@ export default function Hero() {
                 {/* Central family photo — JS animates via inline style */}
                 <div ref={photoRef} className={styles.photoWrap}>
                     <Image
-                        src="/indian-family.png"
+                        src="/family2.png"
                         alt="A happy Indian multi-generational family — Healthcare Club"
                         width={920}
                         height={690}

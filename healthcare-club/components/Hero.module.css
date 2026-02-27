@@ -95,7 +95,7 @@
     object-fit: contain;
     object-position: bottom center;
     filter: drop-shadow(0 40px 80px rgba(10, 191, 140, 0.12));
-    mix-blend-mode: multiply;
+    mix-blend-mode: screen;
 }
 
 /* ─── Floating chips (absolute, clipped by .sticky overflow:hidden) ─── */
