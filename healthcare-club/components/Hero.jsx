@@ -3,90 +3,101 @@ import { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import styles from './Hero.module.css';
 
-export default function Hero() {
-    const heroRef = useRef(null);
-    const imgRef = useRef(null);
+const chips = [
+    { label: '🗂️ Secure Records', color: '#c8f7e8', rotate: '-8deg', top: '28%', left: '5%' },
+    { label: '👨‍👩‍👧 Family Linked', color: '#fdd5d5', rotate: '6deg', top: '42%', left: '3%' },
+    { label: '📊 Track Vitals', color: '#d4f0ff', rotate: '-5deg', top: '28%', right: '5%' },
+    { label: '🆘 Emergency ✓', color: '#d8f5d0', rotate: '7deg', top: '42%', right: '3%' },
+];
 
-    // Subtle parallax on the photo only
+export default function Hero() {
+    const photoRef = useRef(null);
+    const heroRef = useRef(null);
+
     useEffect(() => {
         const onScroll = () => {
-            if (!imgRef.current) return;
-            const y = window.scrollY * 0.12;
-            imgRef.current.style.transform = `translateY(${y}px)`;
+            if (!heroRef.current || !photoRef.current) return;
+            const heroTop = heroRef.current.offsetTop;
+            const heroHeight = heroRef.current.offsetHeight;
+            const vp = window.innerHeight;
+            const scrolled = window.scrollY - heroTop;
+            const maxScroll = heroHeight - vp;
+            const progress = Math.max(0, Math.min(1, scrolled / maxScroll));
+
+            // Include the horizontal centering AND the scroll animation together
+            const yMove = progress * -160;
+            const scale = 1 + progress * 0.06;
+            // We use translateX(-50%) to keep it centered + add the scroll Y
+            photoRef.current.style.transform = `translateX(-50%) translateY(${yMove}px) scale(${scale})`;
+            photoRef.current.style.opacity = String(1 - progress * 0.4);
         };
+
         window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
         return () => window.removeEventListener('scroll', onScroll);
     }, []);
 
     return (
         <section ref={heroRef} className={styles.hero} id="hero">
-            {/* Background gradient blob */}
-            <div className={styles.bgBlob} />
-            <div className={styles.bgBlobRight} />
+            <div className={styles.sticky}>
+                {/* Yellow gradient background circle */}
+                <div className={styles.bgCircle} />
 
-            <div className={styles.container}>
-                {/* ── LEFT: Text ── */}
-                <div className={styles.left}>
-                    <p className={styles.badge}>
-                        <span className={styles.badgeDot} />
-                        Trusted by 10 Lakh+ Indian Families
-                    </p>
+                {/* Floating feature chips */}
+                {chips.map((chip, i) => (
+                    <div
+                        key={i}
+                        className={styles.chip}
+                        style={{
+                            background: chip.color,
+                            top: chip.top,
+                            left: chip.left ?? 'auto',
+                            right: chip.right ?? 'auto',
+                            '--rot': chip.rotate,
+                            animationDelay: `${i * 0.6}s`,
+                        }}
+                    >
+                        {chip.label}
+                    </div>
+                ))}
 
+                {/* Hero headline — z-index 2, behind photo */}
+                <div className={styles.textBlock}>
+                    <p className={styles.badge}>( Trusted by 10 Lakh+ Indian Families )</p>
                     <h1 className={styles.headline}>
                         <span className={styles.plain}>Confident</span>{' '}
-                        <em className={styles.italic}>Health.</em>
+                        <em className={styles.italicWord}>Health.</em>
                         <br />
                         <span className={styles.teal}>Smarter</span>{' '}
                         <span className={styles.plain}>Care.</span>
                     </h1>
-
-                    <p className={styles.subtext}>
-                        One secure app for your entire family&apos;s medical records,
-                        vitals, prescriptions, and emergency care — always accessible,
-                        always protected.
-                    </p>
-
-                    <div className={styles.chipRow}>
-                        {['🗂️ Secure Records', '👨‍👩‍👧 Family Linked', '📊 Track Vitals', '🆘 Emergency ✓'].map((c) => (
-                            <span key={c} className={styles.chip}>{c}</span>
-                        ))}
-                    </div>
-
-                    <div className={styles.ctaRow}>
-                        <a href="#cta" className={styles.ctaBtn}>
-                            Download Free App
-                            <span className={styles.ctaArrow}>→</span>
-                        </a>
-                        <a href="#how-it-works" className={styles.ctaSecondary}>
-                            See how it works
-                        </a>
-                    </div>
-
-                    <p className={styles.trustNote}>
-                        Available on iOS & Android · No credit card required
-                    </p>
                 </div>
 
-                {/* ── RIGHT: Photo ── */}
-                <div className={styles.right}>
-                    <div className={styles.photoGlow} />
-                    <div ref={imgRef} className={styles.photoWrap}>
-                        <Image
-                            src="/family2.png"
-                            alt="A happy Indian multi-generational family — Healthcare Club"
-                            width={680}
-                            height={600}
-                            priority
-                            className={styles.photo}
-                        />
-                    </div>
+                {/* Central family photo — JS animates via inline style */}
+                <div ref={photoRef} className={styles.photoWrap}>
+                    <Image
+                        src="/family2.png"
+                        alt="A happy Indian multi-generational family — Healthcare Club"
+                        width={920}
+                        height={690}
+                        priority
+                        className={styles.photo}
+                    />
                 </div>
-            </div>
 
-            {/* Scroll hint */}
-            <div className={styles.scrollHint} aria-hidden="true">
-                <span>scroll</span>
-                <div className={styles.scrollLine} />
+                {/* CTA pill */}
+                <div className={styles.ctaRow}>
+                    <a href="#cta" className={styles.ctaBtn}>
+                        Download Free App
+                        <span className={styles.ctaArrow}>→</span>
+                    </a>
+                </div>
+
+                {/* Scroll hint */}
+                <div className={styles.scrollHint} aria-hidden="true">
+                    <span>scroll</span>
+                    <div className={styles.scrollLine} />
+                </div>
             </div>
         </section>
     );

@@ -1,115 +1,68 @@
-/* ─── Section ─── */
+/* The hero occupies 200vh so the scroll zone exists */
 .hero {
     position: relative;
-    min-height: 100vh;
-    background: #f7fefb;
+    height: 200vh;
+}
+
+/* The sticky frame is pinned for the entire 200vh scroll duration */
+.sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
     overflow: hidden;
+    /* ← chips CANNOT escape this box */
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
+    justify-content: flex-start;
 }
 
-/* Background gradient blobs */
-.bgBlob {
+/* ─── Background yellow gradient circle ─── */
+.bgCircle {
     position: absolute;
-    top: -100px;
-    left: -150px;
-    width: 600px;
-    height: 600px;
+    bottom: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(ellipse at center bottom, #fef9c3 0%, #f5e642 45%, transparent 75%);
     border-radius: 50%;
-    background: radial-gradient(circle, #d4f7ed 0%, transparent 70%);
-    pointer-events: none;
-    z-index: 0;
-}
-
-.bgBlobRight {
-    position: absolute;
-    bottom: -80px;
-    right: -80px;
-    width: 500px;
-    height: 500px;
-    border-radius: 50%;
-    background: radial-gradient(circle, #fef9c3 0%, transparent 70%);
-    pointer-events: none;
-    z-index: 0;
-}
-
-/* ─── Two-column container ─── */
-.container {
-    position: relative;
     z-index: 1;
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 100px 64px 60px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
-    align-items: center;
-    min-height: 100vh;
+    pointer-events: none;
 }
 
-/* ══════════════
-   LEFT — Text
-══════════════ */
-.left {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
+/* ─── Headline text block ─── */
+.textBlock {
+    position: absolute;
+    top: 17vh;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 5;
+    pointer-events: none;
+    padding: 0 24px;
 }
 
-/* Badge */
 .badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(10, 191, 140, 0.1);
-    border: 1px solid rgba(10, 191, 140, 0.25);
-    border-radius: 100px;
-    padding: 6px 16px;
+    font-family: var(--font-sans);
     font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.8px;
-    color: #0abf8c;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--muted);
     text-transform: uppercase;
-    margin-bottom: 28px;
-    width: fit-content;
+    margin-bottom: 16px;
 }
 
-@keyframes pulse {
-
-    0%,
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-
-    50% {
-        opacity: 0.4;
-        transform: scale(0.7);
-    }
-}
-
-.badgeDot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: #0abf8c;
-    flex-shrink: 0;
-    animation: pulse 2s ease-in-out infinite;
-}
-
-/* Headline */
 .headline {
     font-family: var(--font-serif);
-    font-size: clamp(44px, 6vw, 80px);
+    font-size: clamp(52px, 9vw, 100px);
     font-weight: 900;
     line-height: 1.05;
     color: var(--dark);
     letter-spacing: -0.02em;
-    margin-bottom: 24px;
 }
 
-.italic {
+.italicWord {
     font-style: italic;
     font-weight: 700;
 }
@@ -123,79 +76,87 @@
     color: var(--dark);
 }
 
-/* Subtext */
-.subtext {
-    font-family: var(--font-sans);
-    font-size: 16px;
-    color: var(--muted);
-    line-height: 1.75;
-    max-width: 480px;
-    margin-bottom: 32px;
+/* ─── Central photo ─── */
+.photoWrap {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 920px;
+    z-index: 3;
+    will-change: transform, opacity;
+    pointer-events: none;
 }
 
-/* Feature chips row */
-.chipRow {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 40px;
+.photo {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    object-position: bottom center;
+    filter: drop-shadow(0 40px 80px rgba(10, 191, 140, 0.12));
+    mix-blend-mode: screen;
 }
 
+/* ─── Floating chips (absolute, clipped by .sticky overflow:hidden) ─── */
 .chip {
-    background: white;
-    border: 1px solid rgba(10, 191, 140, 0.2);
+    position: absolute;
+    padding: 10px 18px;
     border-radius: 50px;
-    padding: 7px 16px;
     font-family: var(--font-sans);
-    font-size: 12.5px;
+    font-size: 13px;
     font-weight: 600;
     color: var(--dark);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    z-index: 4;
+    transform: rotate(var(--rot, 0deg));
+    animation: floatChip 4s ease-in-out infinite;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
     white-space: nowrap;
 }
 
-/* CTA row */
+/* ─── CTA row ─── */
 .ctaRow {
+    position: absolute;
+    bottom: 8vh;
+    left: 0;
+    right: 0;
+    z-index: 5;
     display: flex;
-    align-items: center;
-    gap: 24px;
-    margin-bottom: 24px;
-    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .ctaBtn {
     display: inline-flex;
     align-items: center;
     gap: 14px;
-    background: var(--dark);
-    color: white;
-    padding: 16px 32px;
+    background: var(--white);
+    color: var(--dark);
+    padding: 18px 48px;
     border-radius: 50px;
     font-family: var(--font-sans);
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 700;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.04em;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.13);
+    transition: transform 0.2s, box-shadow 0.2s;
     text-transform: uppercase;
-    text-decoration: none;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
-    transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
 }
 
 .ctaBtn:hover {
-    transform: translateY(-3px);
-    background: #0abf8c;
-    box-shadow: 0 16px 40px rgba(10, 191, 140, 0.35);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2);
 }
 
 .ctaArrow {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.2);
-    font-size: 16px;
+    background: var(--teal);
+    color: var(--white);
+    font-size: 18px;
     flex-shrink: 0;
     transition: transform 0.2s;
 }
@@ -204,76 +165,10 @@
     transform: translateX(4px);
 }
 
-.ctaSecondary {
-    font-family: var(--font-sans);
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--muted);
-    text-decoration: none;
-    border-bottom: 1.5px solid rgba(0, 0, 0, 0.15);
-    padding-bottom: 2px;
-    transition: color 0.2s, border-color 0.2s;
-}
-
-.ctaSecondary:hover {
-    color: var(--teal);
-    border-color: var(--teal);
-}
-
-/* Trust note */
-.trustNote {
-    font-size: 12px;
-    color: var(--muted);
-    opacity: 0.65;
-}
-
-/* ══════════════
-   RIGHT — Photo
-══════════════ */
-.right {
-    position: relative;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    height: 100%;
-}
-
-/* Glow under the photo */
-.photoGlow {
-    position: absolute;
-    bottom: -40px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80%;
-    height: 200px;
-    background: radial-gradient(ellipse, rgba(10, 191, 140, 0.2) 0%, transparent 70%);
-    filter: blur(30px);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 0;
-}
-
-.photoWrap {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    will-change: transform;
-}
-
-.photo {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-    object-position: bottom center;
-    /* screen blend mode makes black background disappear */
-    mix-blend-mode: screen;
-    filter: drop-shadow(0 20px 60px rgba(10, 191, 140, 0.1));
-}
-
 /* ─── Scroll hint ─── */
 .scrollHint {
     position: absolute;
-    bottom: 24px;
+    bottom: 1.5vh;
     left: 50%;
     transform: translateX(-50%);
     z-index: 5;
@@ -296,6 +191,7 @@
     background: linear-gradient(to bottom, var(--muted), transparent);
 }
 
+/* ─── Keyframes ─── */
 @keyframes bounceDown {
 
     0%,
@@ -309,57 +205,27 @@
 }
 
 /* ─── Responsive ─── */
-@media (max-width: 960px) {
-    .container {
-        grid-template-columns: 1fr;
-        padding: 100px 32px 60px;
-        gap: 32px;
-        min-height: unset;
+@media (max-width: 900px) {
+    .hero {
+        height: 160vh;
     }
 
-    .left {
-        align-items: center;
-        text-align: center;
-    }
-
-    .badge {
-        align-self: center;
-    }
-
-    .subtext {
-        max-width: 100%;
-    }
-
-    .chipRow {
-        justify-content: center;
-    }
-
-    .ctaRow {
-        justify-content: center;
-    }
-
-    .right {
-        max-height: 420px;
-        overflow: hidden;
-    }
-}
-
-@media (max-width: 480px) {
-    .container {
-        padding: 80px 20px 40px;
+    .bgCircle {
+        width: 420px;
+        height: 420px;
+        bottom: -100px;
     }
 
     .headline {
-        font-size: clamp(36px, 10vw, 52px);
+        font-size: clamp(40px, 11vw, 68px);
     }
 
-    .ctaRow {
-        flex-direction: column;
-        align-items: stretch;
+    .chip {
+        display: none;
     }
 
     .ctaBtn {
-        text-align: center;
-        justify-content: center;
+        padding: 14px 32px;
+        font-size: 13px;
     }
 }
