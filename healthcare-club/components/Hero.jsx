@@ -63,13 +63,13 @@ export default function Hero() {
 
                 {/* Hero headline — z-index 2, behind photo */}
                 <div className={styles.textBlock}>
-                    <p className={styles.badge}>( Trusted by 10 Lakh+ Indian Families )</p>
                     <h1 className={styles.headline}>
                         <span className={styles.plain}>Confident</span>{' '}
                         <em className={styles.italicWord}>Health.</em>
-                        <br />
-                        <span className={styles.teal}>Smarter</span>{' '}
-                        <span className={styles.plain}>Care.</span>
+                        <span className={styles.secondLine}>
+                            <span className={styles.teal}>Smarter</span>{' '}
+                            <span className={styles.plain}>Care.</span>
+                        </span>
                     </h1>
                 </div>
 
