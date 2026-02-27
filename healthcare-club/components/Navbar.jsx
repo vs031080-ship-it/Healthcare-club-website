@@ -1,10 +1,13 @@
 'use client';
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
+import { usePathname, useRouter } from 'next/navigation';
 import styles from './Navbar.module.css';
 
 export default function Navbar() {
     const navRef = useRef(null);
+    const pathname = usePathname();
+    const router = useRouter();
 
     useEffect(() => {
         const onScroll = () => {
@@ -20,13 +23,17 @@ export default function Navbar() {
     }, []);
 
     const scrollTo = (id) => {
-        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+        if (pathname !== '/') {
+            router.push('/#' + id);
+        } else {
+            document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+        }
     };
 
     return (
         <nav ref={navRef} className={styles.nav}>
             <div className={styles.inner}>
-                <a className={styles.logo} href="#">
+                <a className={styles.logo} href="/">
                     <Image src="/logo-icon.png" alt="Healthcare Club Icon" className={styles.logoIconImage} width={28} height={28} />
                     <span>Healthcare <strong>Club</strong></span>
                 </a>
