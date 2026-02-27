@@ -34,7 +34,7 @@ export default function Navbar() {
                     <li><button onClick={() => scrollTo('features')}>Features</button></li>
                     <li><button onClick={() => scrollTo('how-it-works')}>How It Works</button></li>
                     <li><button onClick={() => scrollTo('vitals')}>Vitals</button></li>
-                    <li><button onClick={() => scrollTo('testimonials')}>Reviews</button></li>
+                    <li><button onClick={() => scrollTo('reviews')}>Reviews</button></li>
                 </ul>
 
                 <button className={styles.cta} onClick={() => scrollTo('cta')}>
