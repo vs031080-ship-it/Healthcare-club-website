@@ -6,9 +6,7 @@ const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.health
 const APP_STORE_URL = 'https://apps.apple.com/in/app/healthcare-club/id6523422689';
 
 const stats = [
-    { value: '10L+', label: 'Families' },
     { value: '4.8★', label: 'Rating' },
-    { value: '50L+', label: 'Records Stored' },
     { value: '100%', label: 'Secure' },
 ];
 
@@ -51,7 +49,7 @@ export default function CTA() {
                     </h2>
 
                     <p className={styles.desc}>
-                        Join over 10 lakh Indian families who trust Healthcare Club for medical records,
+                        Trust Healthcare Club for your medical records,
                         vitals tracking, and emergency care — all in one secure app.
                     </p>
 
